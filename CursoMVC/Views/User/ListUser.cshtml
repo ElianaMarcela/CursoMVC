@@ -1,0 +1,63 @@
+﻿@model IEnumerable<CursoMVC.Models.Users.UserModel>
+
+@{
+    ViewBag.Title = "Listar Usuarios";
+}
+
+<h2>Listar Usuario</h2>
+
+<p>
+    @Html.ActionLink("Crear usuario", "RegisterUser")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Cedula)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Apellido)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Perfil)
+        </th>
+        @*<th>
+            @Html.DisplayNameFor(model => model.Password)
+        </th>*@
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Cedula)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Apellido)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Perfil)
+        </td>
+        @*<td>
+                @Html.DisplayFor(modelItem => item.Password)
+            </td>*@
+        <td>
+            @Html.ActionLink("Editar", "Edit", new { id = item.Cedula }) |
+            @Html.ActionLink("Details", "Details", new { id = item.Cedula }) |
+            @Html.ActionLink("Elimar", "Delete", new { id = item.Cedula })
+        </td>
+    </tr>
+}
+
+</table>
