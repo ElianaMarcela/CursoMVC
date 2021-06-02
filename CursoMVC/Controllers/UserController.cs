@@ -30,7 +30,7 @@ namespace CursoMVC.Controllers
                 model.Perfil = "Nivel_1";
 
                 // Se agrega el modelo al dbContext
-                db.User.Add(model);
+                db.Users.Add(model);
 
                 // Guarda los cambio
                 db.SaveChanges();
@@ -49,7 +49,7 @@ namespace CursoMVC.Controllers
         /// <returns></returns>
         public ActionResult ListUser()
         {
-            List<UserModel> listUser = (from usuario in db.User
+            List<UserModel> listUser = (from usuario in db.Users
                                         orderby usuario.Cedula
                                         select usuario).ToList();
 
@@ -64,7 +64,7 @@ namespace CursoMVC.Controllers
         /// <returns>Vista de tipo UserModel con el usuario consultado</returns>
         public ActionResult EditUser(string id)
         {
-            UserModel User = db.User.Single(edit => edit.Cedula == id);
+            UserModel User = db.Users.Single(edit => edit.Cedula == id);
             return View(User);
         }
 
@@ -79,7 +79,7 @@ namespace CursoMVC.Controllers
         [HttpPost]
         public ActionResult EditUser(string cedula, FormCollection collection)
         {
-            UserModel User = db.User.Single(edit => edit.Cedula == cedula);
+            UserModel User = db.Users.Single(edit => edit.Cedula == cedula);
             if (TryUpdateModel(User))
             {
                 db.SaveChanges();
@@ -97,7 +97,7 @@ namespace CursoMVC.Controllers
         /// <returns>Vista de tipo UserModel con el usuario consultado</returns>
         public ActionResult DeleteUser(string id)
         {
-            UserModel User = db.User.Single(delete => delete.Cedula == id);
+            UserModel User = db.Users.Single(delete => delete.Cedula == id);
             return View(User);
         }
 
@@ -112,10 +112,10 @@ namespace CursoMVC.Controllers
         [HttpPost]
         public ActionResult DeleteUser(string id, FormCollection collection)
         {
-            UserModel User = db.User.Single(delete => delete.Cedula == id);
+            UserModel User = db.Users.Single(delete => delete.Cedula == id);
             try
             {
-                db.User.Remove(User);
+                db.Users.Remove(User);
                 db.SaveChanges();
                 return RedirectToAction("ListUser");
             }
@@ -123,7 +123,45 @@ namespace CursoMVC.Controllers
             {
                 return View(User);
             }
+        }
 
+        public ActionResult Login()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Login(LoginViewModel model)
+        {
+            List<UserModel> loginUser = (from usuarioLogin in db.Users
+                            where usuarioLogin.Cedula == model.Login &&
+                                  usuarioLogin.Password == model.Password
+                            select usuarioLogin).ToList();
+
+            
+            if (loginUser.Count == 1)
+            {
+                Session.Timeout = 10;
+                Session["Login"]  = loginUser[0].Cedula;
+                Session["Nombre"] = loginUser[0].Nombre;
+                Session["Email"]  = loginUser[0].Email;
+                Session["Perfil"] = loginUser[0].Perfil;
+                return RedirectToAction("ListUser");
+            }
+            else
+            {
+                ModelState.AddModelError("", "Usuario o contraseña incorrecto");
+                return View(model);
+            }
+        }
+
+        public ActionResult LogOff()
+        {
+            Session["Login"]  = string.Empty;
+            Session["Nombre"] = string.Empty;
+            Session["Email"]  = string.Empty;
+            Session["Perfil"] = string.Empty;
+            return RedirectToAction("Login");
 
         }
     }

@@ -1,0 +1,15 @@
+﻿@if (!string.IsNullOrEmpty(Convert.ToString(Session["Login"])))
+{
+<ul class="nav navbar-nav navbar-right">
+    <li class="nav-item">
+        <a>
+            @Session["Nombre"]
+        </a>
+    </li>
+    <li>@Html.ActionLink("Salir", "LogOff", "User")</li>
+</ul>}
+else
+{
+<ul class="nav navbar-nav navbar-right">        
+    <li>@Html.ActionLink("Ingresar", "Login", "User")</li>    
+</ul>}

@@ -27,7 +27,7 @@ namespace CursoMVC.Models.Users
     {
         public UserDBContext() { }
 
-        public DbSet<UserModel> User { get; set; }
+        public DbSet<UserModel> Users { get; set; }
 
     }
 }
