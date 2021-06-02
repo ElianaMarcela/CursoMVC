@@ -4,9 +4,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using CursoMVC.Infraestructura;
 
 namespace CursoMVC.Controllers
 {
+    
     public class UserController : Controller
     {
         private UserDBContext db = new UserDBContext();
@@ -47,6 +49,7 @@ namespace CursoMVC.Controllers
         /// Método encargado de Listar los usuarios que se encuentran creados
         /// </summary>
         /// <returns></returns>
+        [FiltrosAutenticacionPersonalizado]
         public ActionResult ListUser()
         {
             List<UserModel> listUser = (from usuario in db.Users
@@ -125,12 +128,14 @@ namespace CursoMVC.Controllers
             }
         }
 
+        [AllowAnonymous]
         public ActionResult Login()
         {
             return View();
         }
 
         [HttpPost]
+        [AllowAnonymous]
         public ActionResult Login(LoginViewModel model)
         {
             List<UserModel> loginUser = (from usuarioLogin in db.Users

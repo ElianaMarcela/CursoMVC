@@ -132,6 +132,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Infraestructura\FiltrosAutenticacionPersonalizado.cs" />
     <Compile Include="Models\Users\LoginViewModel.cs" />
     <Compile Include="Models\Users\RegisterViewModel.cs" />
     <Compile Include="Models\Users\UserModel.cs" />
