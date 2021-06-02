@@ -128,6 +128,10 @@ namespace CursoMVC.Controllers
             }
         }
 
+        /// <summary>
+        /// Método encargado de permitir ingresar al usuario a la aplicación
+        /// </summary>
+        /// <returns></returns>
         [AllowAnonymous]
         public ActionResult Login()
         {
