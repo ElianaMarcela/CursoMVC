@@ -14,6 +14,11 @@ namespace CursoMVC.Infraestructura
         {
             if (string.IsNullOrEmpty(Convert.ToString(filterContext.HttpContext.Session["Login"])))
             {
+                bool skipAuthorization = filterContext.ActionDescriptor.IsDefined(typeof(AllowAnonymousAttribute), true) ||
+                    filterContext.ActionDescriptor.ControllerDescriptor.IsDefined(typeof(AllowAnonymousAttribute), true);
+
+                if (skipAuthorization) return;
+
                 filterContext.Result = new HttpUnauthorizedResult();
             }
         }

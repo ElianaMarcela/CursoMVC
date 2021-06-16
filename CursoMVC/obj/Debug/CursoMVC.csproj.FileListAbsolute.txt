@@ -168,3 +168,7 @@ D:\SourceCode\ProyectosMVC\Clone_CursoMVC\CursoMVC\CursoMVC\bin\EntityFramework.
 D:\SourceCode\ProyectosMVC\Clone_CursoMVC\CursoMVC\CursoMVC\bin\EntityFramework.SqlServer.dll
 D:\SourceCode\ProyectosMVC\Clone_CursoMVC\CursoMVC\CursoMVC\bin\EntityFramework.xml
 D:\SourceCode\ProyectosMVC\Clone_CursoMVC\CursoMVC\CursoMVC\bin\EntityFramework.SqlServer.xml
+D:\Cursos\MVC\CursoMVC\CursoMVC\bin\EntityFramework.dll
+D:\Cursos\MVC\CursoMVC\CursoMVC\bin\EntityFramework.SqlServer.dll
+D:\Cursos\MVC\CursoMVC\CursoMVC\bin\EntityFramework.xml
+D:\Cursos\MVC\CursoMVC\CursoMVC\bin\EntityFramework.SqlServer.xml

@@ -8,7 +8,8 @@ using CursoMVC.Infraestructura;
 
 namespace CursoMVC.Controllers
 {
-    
+
+    [FiltrosAutenticacionPersonalizado]
     public class UserController : Controller
     {
         private UserDBContext db = new UserDBContext();
@@ -49,7 +50,7 @@ namespace CursoMVC.Controllers
         /// Método encargado de Listar los usuarios que se encuentran creados
         /// </summary>
         /// <returns></returns>
-        [FiltrosAutenticacionPersonalizado]
+        
         public ActionResult ListUser()
         {
             List<UserModel> listUser = (from usuario in db.Users
@@ -113,6 +114,7 @@ namespace CursoMVC.Controllers
         /// <param name="collection">Formulario Actual</param>
         /// <returns>Vista actual o que lista los usuarios</returns>
         [HttpPost]
+        [CustomAuthorize(roles: "Admin1234")]
         public ActionResult DeleteUser(string id, FormCollection collection)
         {
             UserModel User = db.Users.Single(delete => delete.Cedula == id);
@@ -172,6 +174,11 @@ namespace CursoMVC.Controllers
             Session["Perfil"] = string.Empty;
             return RedirectToAction("Login");
 
+        }
+
+        public ActionResult Unauthorized()
+        {
+            return View();
         }
     }
 }
